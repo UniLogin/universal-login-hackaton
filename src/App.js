@@ -7,20 +7,13 @@ import ethers from "ethers";
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.privateKey = "n/a";
-    this.contractAddress = "n/a";
-
-    this.sdk = new UniversalLoginSDK(
-      "https://relayer.universallogin.io", // local relayer URL: 'http://localhost:3311'
-      "https://rinkeby.infura.io" // local json Rpc Url: 'http://localhost:18545'
-    );
+    this.state = {privateKey: "n/a", contractAddress: "n/a"};
+    this.sdk = new UniversalLoginSDK('http://localhost:3311', 'http://localhost:18545');
   }
 
   async componentDidMount() {
-    [this.props.privateKey, this.props.contractAddress] = await this.sdk.create(
-      "foobar.mylogin.eth"
-    );
+    const [privateKey, contractAddress] = await this.sdk.create('sddds.mylogin.eth');
+    this.setState({privateKey, contractAddress});
   }
 
   async transfer() {
@@ -33,16 +26,15 @@ class App extends Component {
       gasPrice: 1000000000,
       gasLimit: 1000000
     };
-
-    await this.props.sdk.execute(message, this.props.privateKey);
+    await this.sdk.execute(message, this.props.privateKey);
   }
 
   render() {
     return (
       <div className="App">
         <h1> This is your app </h1>
-        Your device private key: {this.privateKey} <br />
-        Your contract address: {this.contractAddress} <br /> <br />
+        Your device private key: {this.state.privateKey} <br />
+        Your contract address: {this.state.contractAddress} <br /> <br />
         <button onClick={this.transfer}> Transfer </button>
       </div>
     );
