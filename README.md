@@ -23,6 +23,8 @@ Finally, modify `src/App.js` to the files on this github
 
 You are ready for a hackaton!
 
+Now you need to install, open [Postgress](https://postgresapp.com/downloads.html) and click on "initialize".
+
 To run your app, run this command on the terminal:
 
 ```
