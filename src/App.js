@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import UniversalLoginSDK from "universal-login-sdk";
-import ethers from "ethers";
+// import ethers from "ethers";
 
 class App extends Component {
   constructor(props) {
@@ -12,9 +11,18 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const [privateKey, contractAddress] = await this.sdk.create('sddds.mylogin.eth');
-    this.setState({privateKey, contractAddress});
+   
   }
+
+  async register(event) {
+    event.preventDefault()
+    console.log(event.target.username.value + '.mylogin.eth')
+    const username = event.target.username.value + '.mylogin.eth';
+    const [privateKey, contractAddress] = await this.sdk.create(username);
+    this.setState({privateKey, contractAddress});
+  }  
+
+
 
   async transfer() {
     const message = {
@@ -35,6 +43,13 @@ class App extends Component {
         <h1> This is your app </h1>
         Your device private key: {this.state.privateKey} <br />
         Your contract address: {this.state.contractAddress} <br /> <br />
+        <form onSubmit={this.register.bind(this)}>
+        <input type="text" name="username" placeholder="your username" onChange={this.updateUsername}/>.mylogin.eth <br/>
+          <button type="submit"> register </button> <br/>
+        </form><hr/>
+
+
+        
         <button onClick={this.transfer}> Transfer </button>
       </div>
     );
