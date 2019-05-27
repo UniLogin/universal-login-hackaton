@@ -19,7 +19,7 @@ Then open the file package.json and add this to scripts:
 "start:dev": "universal-login start:dev"
 ```
 
-Finally, modify `src/App.js` to the files on this github
+Finally, modify `src/App.js` to [the same file on this github](https://github.com/UniversalLogin/universal-login-hackaton/blob/master/src/App.js)
 
 You are ready for a hackaton!
 
